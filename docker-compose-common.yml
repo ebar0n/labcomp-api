@@ -1,0 +1,15 @@
+mysql:
+  image: mysql
+  volumes:
+    - /data/labcomp/mysql:/var/lib/mysql
+  env_file: ./django/.env
+
+redis:
+  image: redis:latest
+
+django:
+  build: .
+  volumes:
+    - ./:/srv/www/labcomp
+  env_file: ./django/.env
+  working_dir: /srv/www/labcomp/django

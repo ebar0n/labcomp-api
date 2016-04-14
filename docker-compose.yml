@@ -1,0 +1,38 @@
+mysql:
+  extends:
+    file: docker-compose-common.yml
+    service: mysql
+
+redis:
+  extends:
+    file: docker-compose-common.yml
+    service: redis
+
+celerybeat:
+  extends:
+    file: docker-compose-common.yml
+    service: django
+  command: celery -A labcomp beat
+  links:
+    - redis:redis
+    - mysql:mysql
+
+celeryworker:
+  extends:
+    file: docker-compose-common.yml
+    service: django
+  command: celery -A labcomp worker
+  links:
+    - redis:redis
+    - mysql:mysql
+
+django:
+  extends:
+    file: docker-compose-common.yml
+    service: django
+  command: python manage.py runserver 0.0.0.0:8000
+  links:
+    - redis:redis
+    - mysql:mysql
+  ports:
+    - '8000:8000'

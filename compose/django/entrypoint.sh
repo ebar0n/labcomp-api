@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+export REDIS_URL=redis://$REDIS_PORT_6379_TCP_ADDR:$REDIS_PORT_6379_TCP_PORT
+export CACHE_URL="$REDIS_URL?DB=0&PARSER_CLASS=redis.connection.HiredisParser"
+
+if [ -z "$DATABASE_URL" ]; then
+	export DATABASE_URL=mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/$MYSQL_DATABASE
+fi 
+
+exec "$@"

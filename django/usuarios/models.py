@@ -6,7 +6,7 @@ class Usuario(AbstractUser):
     """
     Personalizacion del modelo de usuarios de Django `AbstractUser`
 
-    Los siguientes atributos se heread de la clase AbstracBaseUser
+    Los siguientes atributos se heredan de la clase AbstracBaseUser
         * first_name
         * last_name
         * username

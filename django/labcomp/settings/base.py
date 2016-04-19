@@ -138,3 +138,13 @@ MEDIA_URL = env('MEDIA_URL')
 
 # Email
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+# Redis
+BROKER_URL = env('REDIS_URL')
+
+# Cache
+CACHES = {
+    'default': env.cache()
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'

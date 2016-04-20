@@ -38,6 +38,6 @@ Steps to install Labcomp Site Development Environment [![Build Status](https://t
 
 0. Initialize Database
 
-        labcomp$ docker-compose run --rm djangoo python manage.py migrate
+        labcomp$ docker-compose run --rm django python manage.py migrate
 
 0. Visit [http://dev.labcomp.com:8000/](http://dev.labcomp.com:8000/)

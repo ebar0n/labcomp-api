@@ -50,7 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+
+    'usuarios',
 ]
+
+# User model
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
 MIDDLEWARE_CLASSES = [
     # 'django.middleware.security.SecurityMiddleware',
@@ -140,11 +145,18 @@ MEDIA_URL = env('MEDIA_URL')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # Redis
-BROKER_URL = env('REDIS_URL')
+BROKER_URL = 'redis://{}:{}'.format(env('REDIS_PORT_6379_TCP_ADDR'), env('REDIS_PORT_6379_TCP_PORT'))
 
 # Cache
 CACHES = {
-    'default': env.cache()
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '{}:{}'.format(env('REDIS_PORT_6379_TCP_ADDR'), env('REDIS_PORT_6379_TCP_PORT')),
+        'OPTIONS': {
+            'DB': 1,
+            'PARSER_CLASS': 'redis.connection.HiredisParser'
+        }
+    }
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'

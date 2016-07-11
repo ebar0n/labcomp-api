@@ -32,6 +32,7 @@ before_install:
 
 script:
   - docker pull ebar0n/proxy-cache
+  - docker run --name proxy-cache-trash -d ebar0n/proxy-cache
   - docker run --name proxy-cache -d --publish 3128:3128 --publish 3141:3141 --publish 3142:3142 --volume ~/data/proxy-cache/squid/:/var/spool/squid3 --volume ~/data/proxy-cache/devpi:/var/.devpi/server --volume ~/data/proxy-cache/aptcacherng:/var/cache/apt-cacher-ng ebar0n/proxy-cache
   - docker inspect proxy-cache | grep '"IPAddress":'
   - cp env.example .env

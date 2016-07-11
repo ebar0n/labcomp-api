@@ -7,12 +7,10 @@ from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 if not settings.configured:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'labcomp.settings.development')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'labcomp.settings')
 
 # set the default Django settings module for the 'celery' program.
-app = Celery('labcomp', include=[])
+app = Celery('labcomp', include=['utils.task'])
 
-# Using a string here means the worker will not have to
-# pickle the object when using Windows.
 app.config_from_object('labcomp.celeryconfig')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

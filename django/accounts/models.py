@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import ugettext as _
 
 
-class Usuario(AbstractUser):
+class User(AbstractUser):
     """
     Personalizacion del modelo de usuarios de Django `AbstractUser`
 
@@ -21,9 +22,9 @@ class Usuario(AbstractUser):
         * groups
         * user_permissions
     """
-    foto = models.ImageField(upload_to='usuarios/', blank=True)
-    cedula = models.CharField(max_length=8, unique=True)
+    photo = models.ImageField(upload_to='accounts/photos/', blank=True)
+    identity_card = models.CharField(max_length=8, unique=True)
 
     class Meta:
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')

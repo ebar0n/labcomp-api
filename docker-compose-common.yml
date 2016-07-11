@@ -1,15 +1,46 @@
-mysql:
-  image: mysql
-  volumes:
-    - /data/labcomp/mysql:/var/lib/mysql
-  env_file: ./django/.env
+version: '2'
 
-redis:
-  image: redis:latest
+services:
 
-django:
-  build: .
-  volumes:
-    - ./:/srv/www/labcomp
-  env_file: ./django/.env
-  working_dir: /srv/www/labcomp/django
+  admin-develoment:
+    build:
+      context: .
+      dockerfile: Dockerfile-Development
+    env_file: ./.env
+    volumes:
+      - ./django:/srv/www/django
+    working_dir: /srv/www/django
+
+  ldap:
+    image: osixia/openldap
+    volumes:
+      - ~/data/labcomp/ldap:/var/lib/ldap
+    environment:
+      - LDAP_ORGANISATION=Labcomp C.A
+      - LDAP_DOMAIN=labcomp.com
+
+  mysql:
+    image: mysql
+    volumes:
+      - ~/data/labcomp/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=labcomp
+      - MYSQL_USER=labcomp
+      - MYSQL_PASSWORD=labcomp
+      - MYSQL_ROOT_PASSWORD=labcomp
+
+  nginx:
+    build: ./compose/nginx
+    env_file: ./.env
+    volumes:
+      - ./django/public/media/:/srv/www/media/
+      - ./django/public/staticfiles/:/srv/www/staticfiles/
+      - ./run:/srv/www/run
+    restart: always
+    working_dir: /var/www/run
+    ports:
+      - '80:80'
+      - '443:443'
+
+  redis:
+    image: redis:latest

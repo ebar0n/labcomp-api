@@ -17,14 +17,18 @@ class User(AbstractUser):
         * is_staff
         * last_login
 
-    Inherits the following attributes: PermissionsMixin
+    Los siguientes atributos se heredan de la clase PermissionsMixin
         * is_superuser
         * groups
         * user_permissions
+
+    **Atributos db:**
+        - photo (ImageField): Foto del usuario.
+        - identity_card (CharField): Tarjeta de identificacion.
     """
     photo = models.ImageField(upload_to='accounts/photos/', blank=True)
     identity_card = models.CharField(max_length=8, unique=True)
-
+    
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')

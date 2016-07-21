@@ -33,7 +33,11 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 DATABASES = {
-    'default': env.db('DATABASE_URL')
+    # 'default': env.db('DATABASE_URL')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'local',
+    }
 }
 
 MIDDLEWARE_CLASSES = (
@@ -66,7 +70,10 @@ INSTALLED_APPS = (
     'import_export',
 
     # apps
-    'accounts',
+    'lab_accounts',
+    'lab_rooms',
+    'lab_subjects',
+    'lab_reservations',
 
     'utils',
     'scripts',
@@ -151,7 +158,7 @@ STATIC_URL = env('STATIC_URL')
 MEDIA_ROOT = public_root('media')
 MEDIA_URL = env('MEDIA_URL')
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'lab_accounts.User'
 
 AUTHENTICATION_BACKENDS = (
     # Django

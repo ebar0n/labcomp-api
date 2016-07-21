@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-10 19:26-0430\n"
+"POT-Creation-Date: 2016-07-20 18:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: accounts/apps.py:6 accounts/models.py:30
+#: lab_accounts/apps.py:6 lab_accounts/models.py:34 lab_matters/models.py:21
 msgid "Users"
-msgstr "Usuarios"
+msgstr ""
 
-#: accounts/models.py:29
+#: lab_accounts/models.py:33
 msgid "User"
-msgstr "Usuario"
+msgstr ""
+
+#: lab_matters/models.py:19
+msgid "Name"
+msgstr ""
+
+#: lab_matters/models.py:20
+msgid "Code"
+msgstr ""
+
+#: lab_matters/models.py:22
+msgid "Rooms"
+msgstr ""

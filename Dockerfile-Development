@@ -13,6 +13,4 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip
 COPY ./requirements/base.pip /requirements/base.pip
 COPY ./requirements/development.pip /requirements/development.pip
-RUN pip install -r /requirements/development.pip \
-    -i http://172.17.0.2:3141/root/pypi/ --trusted-host 172.17.0.2 \
-    --timeout 300
+RUN pip install -r /requirements/development.pip

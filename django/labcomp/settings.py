@@ -12,8 +12,8 @@ SECRET_KEY = env('SECRET_KEY')
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_COOKIE_DOMAIN = env('COOKIE_DOMAIN')
-SESSION_COOKIE_DOMAIN = env('COOKIE_DOMAIN')
+#CSRF_COOKIE_DOMAIN = env('COOKIE_DOMAIN')
+#SESSION_COOKIE_DOMAIN = env('COOKIE_DOMAIN')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 INSTALLED_APPS = (
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -254,3 +255,8 @@ LDAP_AUTH_ACTIVE_DIRECTORY_DOMAIN = 'labcom.com'
 # management command. Set to None if you allow anonymous queries.
 LDAP_AUTH_CONNECTION_USERNAME = None
 LDAP_AUTH_CONNECTION_PASSWORD = None
+
+
+# Django Jet
+JET_DEFAULT_THEME = 'light-violet'
+JET_SIDE_MENU_COMPACT = True

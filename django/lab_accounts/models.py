@@ -27,7 +27,7 @@ class User(AbstractUser):
         - identity_card (CharField): Tarjeta de identificacion.
     """
     photo = models.ImageField(upload_to='accounts/photos/', blank=True)
-    identity_card = models.CharField(max_length=8, unique=True)
+    identity_card = models.CharField(max_length=8)
     
     class Meta:
         verbose_name = _('User')

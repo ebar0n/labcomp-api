@@ -28,7 +28,7 @@ class User(AbstractUser):
     """
     photo = models.ImageField(upload_to='accounts/photos/', blank=True)
     identity_card = models.CharField(max_length=8)
-    
+
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')

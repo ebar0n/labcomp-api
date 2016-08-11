@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
+
 # Create your models here.
 class TypeCharacteristic(models.Model):
     """
@@ -14,16 +15,14 @@ class TypeCharacteristic(models.Model):
         - icon (CharField): Icono del tipo caracteristica.
 
     """
-
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     icon = models.CharField(verbose_name=_('Icon'), max_length=20)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Type of characteristic')
         verbose_name_plural = _('Types of characteristics')
-    
 
 
 class Characteristic(models.Model):
@@ -37,7 +36,6 @@ class Characteristic(models.Model):
         - name (CharField): Nombre de la caracteristica.
         - icon (CharField): Icono de la caracteristica.
     """
-    
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     icon = models.CharField(verbose_name=_('Icon'), max_length=20)
     type = models.ForeignKey('TypeCharacteristic', verbose_name=_('Type of characteristic'))
@@ -47,7 +45,7 @@ class Characteristic(models.Model):
     class Meta:
         verbose_name = _('Characteristic')
         verbose_name_plural = _('Characteristics')
-        
+
 
 class TypeInfrastructure(models.Model):
     """
@@ -59,7 +57,6 @@ class TypeInfrastructure(models.Model):
         - name (CharField): Nombre del tipo de infraestructura.
         - icon (CharField): Icono del tipo de infraestructura.
     """
-    
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     icon = models.CharField(verbose_name=_('Icon'), max_length=20)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -68,7 +65,7 @@ class TypeInfrastructure(models.Model):
     class Meta:
         verbose_name = _('Type of infrastructure')
         verbose_name_plural = _('Types of infrastructures')
-        
+
 
 class Room(models.Model):
     """
@@ -80,7 +77,6 @@ class Room(models.Model):
         - name (CharField): Nombre de la sala.
         - type (ForeignKey): Tipo de infraestructura donde se dictara clases.
     """
-    
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     type = models.ForeignKey('TypeInfrastructure', verbose_name=_('Type of infrastructure'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -89,7 +85,7 @@ class Room(models.Model):
     class Meta:
         verbose_name = _('Room')
         verbose_name_plural = _('Rooms')
-        
+
 
 class RoomCharacteristic(models.Model):
     """
@@ -103,7 +99,7 @@ class RoomCharacteristic(models.Model):
         - room (ForeignKey): Clave foranea que hace referencia a la sala.
         - characteristic (ForeignKey): Clave foranea que hace referencia a la caracteristica.
     """
-    
+
     value = models.CharField(verbose_name=_('Value'), max_length=20)
     room = models.ForeignKey('Room', verbose_name=_('Romm'))
     characteristic = models.ForeignKey('Characteristic', verbose_name=_('Characteristic'))

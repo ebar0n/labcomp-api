@@ -68,7 +68,7 @@ class Section(models.Model):
     user = models.ForeignKey('lab_accounts.User', verbose_name=_('User'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Section')
         verbose_name_plural = _('Sections')
@@ -93,7 +93,7 @@ class TimeTable(models.Model):
     room = models.ForeignKey('lab_rooms.Room', verbose_name=_('Room'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('TimeTable')
         verbose_name_plural = _('TimeTables')
@@ -114,7 +114,7 @@ class HourFreed(models.Model):
     timetable = models.ForeignKey('TimeTable', verbose_name=_('TimeTable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Hour Freed')
         verbose_name_plural = _('Hours Freed')
@@ -133,8 +133,7 @@ class Reservation(models.Model):
         - semester (ForeignKey): Clave foranea que hace referencia al semestre.
         - subject (ForeignKey): Clave foranea que hace referencia a la materia.
         - user (IntegerField): Clave foranea que hace referencia al usuario que reservo.
-        - timetable (ManyToManyField): Almacena los bloques de horas que ocupan en el horario la 
-        reservacion.
+        - timetable (ManyToManyField): Almacena los bloques de horas que ocupan en el horario la reservacion.
     """
 
     date = models.DateTimeField(verbose_name=_('Date'))
@@ -146,7 +145,7 @@ class Reservation(models.Model):
     timetable = models.ManyToManyField('TimeTable', verbose_name=_('TimeTable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Reservation')
         verbose_name_plural = _('Reservations')
@@ -171,4 +170,3 @@ class StatusReservationHistoric(models.Model):
     reservation = models.ForeignKey('Reservation', verbose_name=_('Reservation'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    

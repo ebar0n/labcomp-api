@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
+
 # Create your models here.
 class Department(models.Model):
     """
@@ -22,7 +23,7 @@ class Department(models.Model):
     rooms = models.ManyToManyField('lab_rooms.Room', verbose_name=_('Rooms'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Department')
         verbose_name_plural = _('Departments')
@@ -43,7 +44,7 @@ class ReservationPermission(models.Model):
         - department (ForeignKey): Departamento asociado a los limites.
     """
     block_limit = models.IntegerField(verbose_name=_('Block limit'), default=0)
-    weekly_limit = models.IntegerField(verbose_name=_('Weekly limit'),default=0)
+    weekly_limit = models.IntegerField(verbose_name=_('Weekly limit'), default=0)
     biweekly_limit = models.IntegerField(verbose_name=_('Biweekly limit'), default=0)
     monthly_limit = models.IntegerField(verbose_name=_('Monthly limit'), default=0)
     department = models.ForeignKey('Department', verbose_name=_('Department'))
@@ -66,7 +67,7 @@ class Color(models.Model):
     code = models.CharField(verbose_name=_('Code'), max_length=10)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Color')
         verbose_name_plural = _('Colors')
@@ -91,7 +92,7 @@ class Subject(models.Model):
     color = models.ForeignKey('Color', verbose_name=_('Color'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Subject')
         verbose_name_plural = _('Subjects')
@@ -116,7 +117,7 @@ class Semester(models.Model):
     end_date = models.DateField(verbose_name=_('End date'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    
+
     class Meta:
         verbose_name = _('Semester')
         verbose_name_plural = _('Semesters')

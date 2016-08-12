@@ -34,4 +34,3 @@ script:
   - docker-compose run --rm django isort -c -rc -df
   - docker-compose run --rm django flake8
   - docker-compose run --rm django python manage.py check
-  - docker-compose run --rm -e TEST=true django py.test

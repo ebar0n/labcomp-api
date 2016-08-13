@@ -1,1 +1,2 @@
 -r base.pip
+uwsgi==2.0.13

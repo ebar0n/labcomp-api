@@ -1,38 +1,48 @@
-mysql:
-  extends:
-    file: docker-compose-common.yml
-    service: mysql
+version: '2'
 
-redis:
-  extends:
-    file: docker-compose-common.yml
-    service: redis
+services:
 
-celerybeat:
-  extends:
-    file: docker-compose-common.yml
-    service: django
-  command: celery -A labcomp beat
-  links:
-    - redis:redis
-    - mysql:mysql
+  ldap:
+    extends:
+      file: docker-compose-common.yml
+      service: ldap
 
-celeryworker:
-  extends:
-    file: docker-compose-common.yml
-    service: django
-  command: celery -A labcomp worker
-  links:
-    - redis:redis
-    - mysql:mysql
+  mysql:
+    extends:
+      file: docker-compose-common.yml
+      service: mysql
 
-django:
-  extends:
-    file: docker-compose-common.yml
-    service: django
-  command: python manage.py runserver 0.0.0.0:8000
-  links:
-    - redis:redis
-    - mysql:mysql
-  ports:
-    - '8000:8000'
+  redis:
+    extends:
+      file: docker-compose-common.yml
+      service: redis
+
+  celerybeat:
+    extends:
+      file: docker-compose-common.yml
+      service: admin-develoment
+    command: celery -A labcomp beat
+    depends_on:
+      - mysql
+      - redis
+
+  celeryworker:
+    extends:
+      file: docker-compose-common.yml
+      service: admin-develoment
+    command: celery -A labcomp worker
+    depends_on:
+      - mysql
+      - redis
+
+  django:
+    extends:
+      file: docker-compose-common.yml
+      service: admin-develoment
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - ldap
+      - mysql
+      - redis
+    ports:
+      - '8000:8000'

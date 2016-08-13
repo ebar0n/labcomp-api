@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-
-if [ -z "$DATABASE_URL" ]; then
-	export DATABASE_URL=mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/$MYSQL_DATABASE
-fi 
-
-exec "$@"

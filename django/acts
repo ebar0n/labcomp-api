@@ -1,0 +1,37 @@
+* Pasar a internacializacion
+#Tipo de usuario eliminar. El administrador sera Super User
+#Relacion de departamento en permisos de reservacion
+#Tablas dia y bloque choices en horario
+#Tipo de reservacion choices
+#StatusReservation choices
+
+
+
+EstadoReservacionHistorico	x
+EstadoReservacion			x
+HorarioReservacion			x Relacion many en horario
+Reservacion					x
+TipoReservacion				x
+HoraLiberada				x
+Horario						x
+DiaSemana					x
+Bloque						x
+Seccion						x
+Sugerencia					x Ignorada. Es necesaria? Tomar en cuenta despues? 
+Cuenta						x Eliminada por rebundancia
+SemestreMateria				x
+Materia						x
+Color						x
+Semestre					x
+PermisoUso					x Relacion many en departamento
+PersonaDepartamento			x Relacion many en departamento (Pasar relacion a la tabla usuarios)
+Departamento				x
+Trafico						x Eliminada. Es necesaria?
+Persona						x Pasa a llamarse usuarios
+PermisoReservacion			x
+TipoPersona					x Pasa a llamarse Tipo de usuario (Choices)
+SalaCaracteristica			x
+Sala						x
+TipoInfraestructura			x
+Caracteristica				x
+TipoCaracteristica			x

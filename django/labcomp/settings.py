@@ -53,7 +53,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 INSTALLED_APPS = (
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -255,8 +254,3 @@ LDAP_AUTH_ACTIVE_DIRECTORY_DOMAIN = 'labcom.com'
 # management command. Set to None if you allow anonymous queries.
 LDAP_AUTH_CONNECTION_USERNAME = None
 LDAP_AUTH_CONNECTION_PASSWORD = None
-
-
-# Django Jet
-JET_DEFAULT_THEME = 'light-violet'
-JET_SIDE_MENU_COMPACT = True

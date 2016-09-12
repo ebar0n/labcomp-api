@@ -74,7 +74,6 @@ target/
 # dotenv
 .env
 
-
 ### Django ###
 *.log
 *.pot
@@ -82,9 +81,9 @@ target/
 __pycache__/
 local_settings.py
 db.sqlite3
+django/local
 media
 staticfiles
-
 
 # Celery
 celerybeat*

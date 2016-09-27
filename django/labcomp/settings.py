@@ -75,6 +75,9 @@ INSTALLED_APPS = (
     'lab_subjects',
     'lab_reservations',
 
+    # extra
+    'colorful',
+
     'utils',
     'scripts',
 )

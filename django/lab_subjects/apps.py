@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
 
-class LabMattersConfig(AppConfig):
+class LabSubjectsConfig(AppConfig):
     name = 'lab_subjects'
+    verbose_name = 'Materias'

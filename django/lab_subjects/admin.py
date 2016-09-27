@@ -1,28 +1,37 @@
 from django.contrib import admin
 
 from lab_subjects.models import Color, Department, ReservationPermission, Semester, Subject
+from django.utils.html import format_html
 
 
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'code')
 
 
 @admin.register(ReservationPermission)
 class ReservationPermissionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('department', 'block_limit', 'weekly_limit', 'biweekly_limit', 'monthly_limit')
 
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'get_color')
+
+    def get_color(self, obj):
+        return format_html(
+            '<span style="color: {};">{}</span>',
+            obj.code,
+            obj.code
+        )
+    get_color.short_description = 'Color'
 
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'code', 'department')
 
 
 @admin.register(Semester)
 class SemesterAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('code', 'start_date', 'end_date', 'present')

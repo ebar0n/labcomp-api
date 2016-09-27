@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from colorful.fields import RGBColorField
 
 
 # Create your models here.
@@ -28,6 +29,9 @@ class Department(models.Model):
         verbose_name = _('Department')
         verbose_name_plural = _('Departments')
 
+    def __str__(self):
+        return self.name
+
 
 class ReservationPermission(models.Model):
     """
@@ -51,6 +55,13 @@ class ReservationPermission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
+    class Meta:
+        verbose_name = _('Reservation Permission')
+        verbose_name_plural = _('Reservation Permissions')
+
+    def __str__(self):
+        return self.department
+
 
 class Color(models.Model):
     """
@@ -64,13 +75,16 @@ class Color(models.Model):
     """
 
     name = models.CharField(verbose_name=_('Name'), max_length=20)
-    code = models.CharField(verbose_name=_('Code'), max_length=10)
+    code = RGBColorField(verbose_name=_('Code'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
         verbose_name = _('Color')
         verbose_name_plural = _('Colors')
+
+    def __str__(self):
+        return self.name
 
 
 class Subject(models.Model):
@@ -97,6 +111,9 @@ class Subject(models.Model):
         verbose_name = _('Subject')
         verbose_name_plural = _('Subjects')
 
+    def __str__(self):
+        return self.name
+
 
 class Semester(models.Model):
     """
@@ -121,3 +138,6 @@ class Semester(models.Model):
     class Meta:
         verbose_name = _('Semester')
         verbose_name_plural = _('Semesters')
+
+    def __str__(self):
+        return self.code

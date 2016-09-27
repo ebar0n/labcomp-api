@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-20 23:02-0400\n"
+"POT-Creation-Date: 2016-09-22 19:53-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lab_accounts/apps.py:6 lab_accounts/models.py:34 lab_subjects/models.py:21
+#: lab_accounts/apps.py:6 lab_accounts/models.py:34 lab_subjects/models.py:22
 msgid "Users"
 msgstr "Usuarios"
 
 #: lab_accounts/models.py:33 lab_reservations/models.py:68
-#: lab_reservations/models.py:145
+#: lab_reservations/models.py:144
 msgid "User"
 msgstr "Usuario"
 
-#: lab_reservations/models.py:65 lab_subjects/models.py:20
-#: lab_subjects/models.py:66 lab_subjects/models.py:89
-#: lab_subjects/models.py:113
+#: lab_reservations/models.py:65 lab_subjects/models.py:21
+#: lab_subjects/models.py:74 lab_subjects/models.py:100
+#: lab_subjects/models.py:127
 msgid "Code"
-msgstr "Codigo"
+msgstr "Código"
 
-#: lab_reservations/models.py:66 lab_reservations/models.py:143
-#: lab_subjects/models.py:121
+#: lab_reservations/models.py:66 lab_reservations/models.py:142
+#: lab_subjects/models.py:135
 msgid "Semester"
 msgstr "Semestre"
 
-#: lab_reservations/models.py:67 lab_reservations/models.py:144
-#: lab_subjects/models.py:96
+#: lab_reservations/models.py:67 lab_reservations/models.py:143
+#: lab_subjects/models.py:107
 msgid "Subject"
 msgstr "Materia"
 
 #: lab_reservations/models.py:73 lab_reservations/models.py:92
 msgid "Section"
-msgstr "Seccion"
+msgstr "Sección"
 
 #: lab_reservations/models.py:74
 msgid "Sections"
@@ -59,12 +59,12 @@ msgstr "Bloque"
 msgid "Day"
 msgstr "Dia"
 
-#: lab_reservations/models.py:93 lab_rooms/models.py:90
+#: lab_reservations/models.py:93 lab_rooms/models.py:86
 msgid "Room"
 msgstr "Sala"
 
 #: lab_reservations/models.py:98 lab_reservations/models.py:114
-#: lab_reservations/models.py:146
+#: lab_reservations/models.py:145
 msgid "TimeTable"
 msgstr "Horario"
 
@@ -72,7 +72,7 @@ msgstr "Horario"
 msgid "TimeTables"
 msgstr "Horarios"
 
-#: lab_reservations/models.py:113 lab_reservations/models.py:140
+#: lab_reservations/models.py:113 lab_reservations/models.py:139
 msgid "Date"
 msgstr "Fecha"
 
@@ -84,129 +84,137 @@ msgstr "Hora liberada"
 msgid "Hours Freed"
 msgstr "Horas liberadas"
 
-#: lab_reservations/models.py:141
+#: lab_reservations/models.py:140
 msgid "Description"
-msgstr "Descripcion"
+msgstr "Descripción"
 
-#: lab_reservations/models.py:142
+#: lab_reservations/models.py:141
 msgid "Type of reservation"
-msgstr "Tipo de reservacion"
+msgstr "Tipo de reservación"
 
-#: lab_reservations/models.py:151 lab_reservations/models.py:171
+#: lab_reservations/models.py:150 lab_reservations/models.py:170
 msgid "Reservation"
-msgstr "Reservacion"
+msgstr "Reservación"
 
-#: lab_reservations/models.py:152
+#: lab_reservations/models.py:151
 msgid "Reservations"
 msgstr "Reservaciones"
 
-#: lab_reservations/models.py:168 lab_subjects/models.py:115
+#: lab_reservations/models.py:167 lab_subjects/models.py:129
 msgid "Start date"
 msgstr "Fecha de inicio"
 
-#: lab_reservations/models.py:169 lab_subjects/models.py:116
+#: lab_reservations/models.py:168 lab_subjects/models.py:130
 msgid "End date"
 msgstr "Fecha de fin"
 
-#: lab_reservations/models.py:170
+#: lab_reservations/models.py:169
 msgid "Status"
 msgstr "Status"
 
-#: lab_rooms/models.py:18 lab_rooms/models.py:41 lab_rooms/models.py:63
-#: lab_rooms/models.py:84 lab_subjects/models.py:19 lab_subjects/models.py:65
-#: lab_subjects/models.py:88
+#: lab_rooms/models.py:18 lab_rooms/models.py:39 lab_rooms/models.py:60
+#: lab_rooms/models.py:80 lab_subjects/models.py:20 lab_subjects/models.py:73
+#: lab_subjects/models.py:99
 msgid "Name"
 msgstr "Nombre"
 
-#: lab_rooms/models.py:19 lab_rooms/models.py:42 lab_rooms/models.py:64
+#: lab_rooms/models.py:19 lab_rooms/models.py:40 lab_rooms/models.py:61
 msgid "Icon"
 msgstr "Icono"
 
-#: lab_rooms/models.py:24 lab_rooms/models.py:43
+#: lab_rooms/models.py:24 lab_rooms/models.py:41
 msgid "Type of characteristic"
-msgstr "Tipo de caracteristica"
+msgstr "Tipo de característica"
 
 #: lab_rooms/models.py:25
 msgid "Types of characteristics"
-msgstr "Tipos de caracteristicas"
+msgstr "Tipos de características"
 
-#: lab_rooms/models.py:48 lab_rooms/models.py:109
+#: lab_rooms/models.py:46 lab_rooms/models.py:105
 msgid "Characteristic"
-msgstr "Caracteristica"
+msgstr "Característica"
 
-#: lab_rooms/models.py:49
+#: lab_rooms/models.py:47
 msgid "Characteristics"
-msgstr "Caracteristicas"
+msgstr "Características"
 
-#: lab_rooms/models.py:69 lab_rooms/models.py:85
+#: lab_rooms/models.py:66 lab_rooms/models.py:81
 msgid "Type of infrastructure"
 msgstr "Tipo de infraestructura"
 
-#: lab_rooms/models.py:70
+#: lab_rooms/models.py:67
 msgid "Types of infrastructures"
 msgstr "Tipos de infraestructuras"
 
-#: lab_rooms/models.py:91 lab_subjects/models.py:22
+#: lab_rooms/models.py:87 lab_subjects/models.py:23
 msgid "Rooms"
 msgstr "Salas"
 
-#: lab_rooms/models.py:107
+#: lab_rooms/models.py:103
 msgid "Value"
 msgstr "Valor"
 
-#: lab_rooms/models.py:108
+#: lab_rooms/models.py:104
 msgid "Romm"
 msgstr "Sala"
 
-#: lab_rooms/models.py:114
+#: lab_rooms/models.py:110
 msgid "Characteristic of the room"
-msgstr "Caracteristica de la sala"
+msgstr "Característica de la sala"
 
-#: lab_rooms/models.py:115
+#: lab_rooms/models.py:111
 msgid "Characteristics of the rooms"
-msgstr "Caracteristicas de la sala"
+msgstr "Características de la sala"
 
-#: lab_subjects/models.py:27 lab_subjects/models.py:49
-#: lab_subjects/models.py:90
+#: lab_subjects/models.py:28 lab_subjects/models.py:53
+#: lab_subjects/models.py:101
 msgid "Department"
 msgstr "Departamento"
 
-#: lab_subjects/models.py:28
+#: lab_subjects/models.py:29
 msgid "Departments"
 msgstr "Departamentos"
 
-#: lab_subjects/models.py:45
+#: lab_subjects/models.py:49
 msgid "Block limit"
-msgstr "Limite de bloque"
+msgstr "Límite de bloque"
 
-#: lab_subjects/models.py:46
+#: lab_subjects/models.py:50
 msgid "Weekly limit"
-msgstr "Limite semanal"
+msgstr "Límite semanal"
 
-#: lab_subjects/models.py:47
+#: lab_subjects/models.py:51
 msgid "Biweekly limit"
-msgstr "Limite quincenal"
+msgstr "Límite quincenal"
 
-#: lab_subjects/models.py:48
+#: lab_subjects/models.py:52
 msgid "Monthly limit"
-msgstr "Limite mensual"
+msgstr "Límite mensual"
 
-#: lab_subjects/models.py:71 lab_subjects/models.py:91
+#: lab_subjects/models.py:58
+msgid "Reservation Permission"
+msgstr "Permiso de Reservación"
+
+#: lab_subjects/models.py:59
+msgid "Reservation Permissions"
+msgstr "Permisos de Reservación"
+
+#: lab_subjects/models.py:79 lab_subjects/models.py:102
 msgid "Color"
 msgstr "Color"
 
-#: lab_subjects/models.py:72
+#: lab_subjects/models.py:80
 msgid "Colors"
 msgstr "Colores"
 
-#: lab_subjects/models.py:97
+#: lab_subjects/models.py:108
 msgid "Subjects"
 msgstr "Materias"
 
-#: lab_subjects/models.py:114
+#: lab_subjects/models.py:128
 msgid "Present"
 msgstr "Actual"
 
-#: lab_subjects/models.py:122
+#: lab_subjects/models.py:136
 msgid "Semesters"
 msgstr "Semestres"

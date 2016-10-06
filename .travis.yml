@@ -25,9 +25,9 @@ script:
   - docker inspect proxy-cache | grep '"IPAddress":'
   - cp env.example .env
   - docker-compose build
-  - docker-compose up -d mysql
+  #- docker-compose up -d mysql
   - docker-compose run --rm django isort -c -rc -df
   - docker-compose run --rm django flake8
-  - docker-compose run --rm django python manage.py check
-  - docker-compose run --rm django python manage.py migrate
-  - docker-compose run --rm -e TEST=true django py.test
+  #- docker-compose run --rm django python manage.py check
+  #- docker-compose run --rm django python manage.py migrate
+  #- docker-compose run --rm -e TEST=true django py.test

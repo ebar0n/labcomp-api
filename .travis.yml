@@ -5,7 +5,7 @@ sudo: required
 services:
   - docker
 language: python
-python: 3.5
+python: 2.7
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
@@ -14,23 +14,20 @@ cache:
   directories:
   - ~/data/proxy-cache/
 
-before_install:  
+before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
 script:
   - docker pull ebar0n/proxy-cache
-  - docker run --name proxy-cache-trash -d ebar0n/proxy-cache
   - docker run --name proxy-cache -d --publish 3128:3128 --publish 3141:3141 --publish 3142:3142 --volume ~/data/proxy-cache/squid/:/var/spool/squid3 --volume ~/data/proxy-cache/devpi:/var/.devpi/server --volume ~/data/proxy-cache/aptcacherng:/var/cache/apt-cacher-ng ebar0n/proxy-cache
   - docker inspect proxy-cache | grep '"IPAddress":'
   - cp env.example .env
   - docker-compose build
   - docker-compose up -d mysql
-  - docker -v
-  - docker ps
-  - docker-compose -v
-  - docker-compose ps
   - docker-compose run --rm django isort -c -rc -df
   - docker-compose run --rm django flake8
   - docker-compose run --rm django python manage.py check
+  - docker-compose run --rm django python manage.py migrate
+  - docker-compose run --rm -e TEST=true django py.test

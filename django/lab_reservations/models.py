@@ -21,30 +21,30 @@ choices_blocks = [
 ]
 
 choices_days = [
-    [1, 'Lunes'],
-    [2, 'Martes'],
-    [3, 'Miércoles'],
-    [4, 'Jueves'],
-    [5, 'Viernes'],
-    [6, 'Sábado'],
-    [7, 'Domingo'],
+    [1, _('Monday')],
+    [2, _('Tuesday')],
+    [3, _('Wednesday')],
+    [4, _('Thursday')],
+    [5, _('Friday')],
+    [6, _('Saturday')],
+    [7, _('Sunday')],
 ]
 
 choices_type_reservations = [
-    [1, 'Parcial'],
-    [2, 'Quiz'],
-    [3, 'Preparaduria'],
-    [4, 'Conferencia'],
-    [5, 'Revisión'],
-    [6, 'Clase Recuperativa'],
-    [7, 'Otra'],
+    [1, _('Partial')],
+    [2, _('Quiz')],
+    [3, _('Preparaduria')],
+    [4, _('Conference')],
+    [5, _('Review')],
+    [6, _('Recuperative class')],
+    [7, _('Other')],
 ]
 
 choices_status_reservations = [
-    [1, 'Aprobado'],
-    [2, 'Pendiente'],
-    [3, 'Rechazado'],
-    [4, 'Cancelado'],
+    [1, _('Approved')],
+    [2, _('Pending')],
+    [3, _('Rejected')],
+    [4, _('Canceled')],
 ]
 
 
@@ -62,16 +62,16 @@ class Section(models.Model):
         - user (ForeignKey): Clave foranea del usuario o profesor de la seccion.
     """
 
-    code = models.CharField(verbose_name=_('Code'), max_length=20)
-    semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('Semester'))
-    subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('Subject'))
-    user = models.ForeignKey('lab_accounts.User', verbose_name=_('User'))
+    code = models.CharField(verbose_name=_('code'), max_length=20)
+    semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
+    subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
+    user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Section')
-        verbose_name_plural = _('Sections')
+        verbose_name = _('section')
+        verbose_name_plural = _('sections')
 
 
 class TimeTable(models.Model):
@@ -87,16 +87,16 @@ class TimeTable(models.Model):
         - room (ForeignKey): Clave foranea que hace referencia a la sala.
     """
 
-    block = models.IntegerField(verbose_name=_('Block'), choices=choices_blocks)
-    day = models.IntegerField(verbose_name=_('Day'), choices=choices_days)
-    section = models.ForeignKey('Section', verbose_name=_('Section'))
-    room = models.ForeignKey('lab_rooms.Room', verbose_name=_('Room'))
+    block = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
+    day = models.IntegerField(verbose_name=_('day'), choices=choices_days)
+    section = models.ForeignKey('Section', verbose_name=_('section'))
+    room = models.ForeignKey('lab_rooms.Room', verbose_name=_('room'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('TimeTable')
-        verbose_name_plural = _('TimeTables')
+        verbose_name = _('timetable')
+        verbose_name_plural = _('timetables')
 
 
 class HourFreed(models.Model):
@@ -110,14 +110,14 @@ class HourFreed(models.Model):
         - timetable (ForeignKey): Bloque del horario que fue liberado.
     """
 
-    date = models.DateTimeField(verbose_name=_('Date'))
-    timetable = models.ForeignKey('TimeTable', verbose_name=_('TimeTable'))
+    date = models.DateTimeField(verbose_name=_('date'))
+    timetable = models.ForeignKey('TimeTable', verbose_name=_('timetable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Hour Freed')
-        verbose_name_plural = _('Hours Freed')
+        verbose_name = _('hour freed')
+        verbose_name_plural = _('hours freed')
 
 
 class Reservation(models.Model):
@@ -136,19 +136,19 @@ class Reservation(models.Model):
         - timetable (ManyToManyField): Almacena los bloques de horas que ocupan en el horario la reservacion.
     """
 
-    date = models.DateTimeField(verbose_name=_('Date'))
-    description = models.CharField(verbose_name=_('Description'), max_length=200)
-    type = models.IntegerField(verbose_name=_('Type of reservation'), choices=choices_type_reservations)
-    semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('Semester'))
-    subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('Subject'))
-    user = models.ForeignKey('lab_accounts.User', verbose_name=_('User'))
-    timetable = models.ManyToManyField('TimeTable', verbose_name=_('TimeTable'))
+    date = models.DateTimeField(verbose_name=_('date'))
+    description = models.CharField(verbose_name=_('description'), max_length=200)
+    type = models.IntegerField(verbose_name=_('type of reservation'), choices=choices_type_reservations)
+    semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
+    subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
+    user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
+    timetable = models.ManyToManyField('TimeTable', verbose_name=_('timetable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Reservation')
-        verbose_name_plural = _('Reservations')
+        verbose_name = _('reservation')
+        verbose_name_plural = _('reservations')
 
 
 class StatusReservationHistoric(models.Model):
@@ -164,9 +164,9 @@ class StatusReservationHistoric(models.Model):
         - reservation (ForeignKey): Clave foranea que hace referencia a la reservacion.
     """
 
-    start_date = models.DateTimeField(verbose_name=_('Start date'))
-    end_date = models.DateTimeField(verbose_name=_('End date'))
-    status = models.IntegerField(verbose_name=_('Status'), choices=choices_status_reservations)
-    reservation = models.ForeignKey('Reservation', verbose_name=_('Reservation'))
+    start_date = models.DateTimeField(verbose_name=_('start date'))
+    end_date = models.DateTimeField(verbose_name=_('end date'))
+    status = models.IntegerField(verbose_name=_('status'), choices=choices_status_reservations)
+    reservation = models.ForeignKey('Reservation', verbose_name=_('reservation'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

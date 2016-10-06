@@ -30,5 +30,5 @@ class User(AbstractUser):
     identity_card = models.CharField(max_length=8)
 
     class Meta:
-        verbose_name = _('User')
-        verbose_name_plural = _('Users')
+        verbose_name = _('user')
+        verbose_name_plural = _('users')

@@ -1,7 +1,7 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
 from lab_subjects.models import Color, Department, ReservationPermission, Semester, Subject
-from django.utils.html import format_html
 
 
 @admin.register(Department)

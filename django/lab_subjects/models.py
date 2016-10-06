@@ -1,6 +1,6 @@
+from colorful.fields import RGBColorField
 from django.db import models
 from django.utils.translation import ugettext as _
-from colorful.fields import RGBColorField
 
 
 # Create your models here.
@@ -18,16 +18,16 @@ class Department(models.Model):
           profesores del departamento.
     """
 
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    code = models.CharField(verbose_name=_('Code'), unique=True, max_length=20)
-    users = models.ManyToManyField('lab_accounts.User', verbose_name=_('Users'))
-    rooms = models.ManyToManyField('lab_rooms.Room', verbose_name=_('Rooms'))
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    code = models.CharField(verbose_name=_('code'), unique=True, max_length=20)
+    users = models.ManyToManyField('lab_accounts.User', verbose_name=_('users'))
+    rooms = models.ManyToManyField('lab_rooms.Room', verbose_name=_('rooms'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Department')
-        verbose_name_plural = _('Departments')
+        verbose_name = _('department')
+        verbose_name_plural = _('departments')
 
     def __str__(self):
         return self.name
@@ -47,17 +47,17 @@ class ReservationPermission(models.Model):
         - monthly_limit (IntegerField): Limite mensual de reservaciones.
         - department (ForeignKey): Departamento asociado a los limites.
     """
-    block_limit = models.IntegerField(verbose_name=_('Block limit'), default=0)
-    weekly_limit = models.IntegerField(verbose_name=_('Weekly limit'), default=0)
-    biweekly_limit = models.IntegerField(verbose_name=_('Biweekly limit'), default=0)
-    monthly_limit = models.IntegerField(verbose_name=_('Monthly limit'), default=0)
-    department = models.ForeignKey('Department', verbose_name=_('Department'))
+    block_limit = models.IntegerField(verbose_name=_('block limit'), default=0)
+    weekly_limit = models.IntegerField(verbose_name=_('weekly limit'), default=0)
+    biweekly_limit = models.IntegerField(verbose_name=_('biweekly limit'), default=0)
+    monthly_limit = models.IntegerField(verbose_name=_('monthly limit'), default=0)
+    department = models.ForeignKey('Department', verbose_name=_('department'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Reservation Permission')
-        verbose_name_plural = _('Reservation Permissions')
+        verbose_name = _('reservation permission')
+        verbose_name_plural = _('reservation permissions')
 
     def __str__(self):
         return self.department
@@ -74,14 +74,14 @@ class Color(models.Model):
         - code (CharField): Codigo hexadecimal del color.
     """
 
-    name = models.CharField(verbose_name=_('Name'), max_length=20)
-    code = RGBColorField(verbose_name=_('Code'))
+    name = models.CharField(verbose_name=_('name'), max_length=20)
+    code = RGBColorField(verbose_name=_('code'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Color')
-        verbose_name_plural = _('Colors')
+        verbose_name = _('color')
+        verbose_name_plural = _('colors')
 
     def __str__(self):
         return self.name
@@ -100,16 +100,16 @@ class Subject(models.Model):
         - color (CharField): Color de la materia.
     """
 
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    code = models.CharField(verbose_name=_('Code'), max_length=20)
-    department = models.ForeignKey('Department', verbose_name=_('Department'))
-    color = models.ForeignKey('Color', verbose_name=_('Color'))
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    code = models.CharField(verbose_name=_('code'), max_length=20)
+    department = models.ForeignKey('Department', verbose_name=_('department'))
+    color = models.ForeignKey('Color', verbose_name=_('color'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Subject')
-        verbose_name_plural = _('Subjects')
+        verbose_name = _('subject')
+        verbose_name_plural = _('subjects')
 
     def __str__(self):
         return self.name
@@ -128,16 +128,16 @@ class Semester(models.Model):
         - end_date (CharField): Fecha de fin del semestre.
     """
 
-    code = models.CharField(verbose_name=_('Code'), max_length=20)
-    present = models.BooleanField(verbose_name=_('Present'))
-    start_date = models.DateField(verbose_name=_('Start date'))
-    end_date = models.DateField(verbose_name=_('End date'))
+    code = models.CharField(verbose_name=_('code'), max_length=20)
+    present = models.BooleanField(verbose_name=_('present'))
+    start_date = models.DateField(verbose_name=_('start date'))
+    end_date = models.DateField(verbose_name=_('end date'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Semester')
-        verbose_name_plural = _('Semesters')
+        verbose_name = _('semester')
+        verbose_name_plural = _('semesters')
 
     def __str__(self):
         return self.code

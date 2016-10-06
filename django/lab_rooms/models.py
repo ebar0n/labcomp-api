@@ -15,14 +15,14 @@ class TypeCharacteristic(models.Model):
         - icon (CharField): Icono del tipo caracteristica.
 
     """
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    icon = models.CharField(verbose_name=_('Icon'), max_length=20)
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    icon = models.CharField(verbose_name=_('icon'), max_length=20)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Type of characteristic')
-        verbose_name_plural = _('Types of characteristics')
+        verbose_name = _('type of characteristic')
+        verbose_name_plural = _('types of characteristics')
 
 
 class Characteristic(models.Model):
@@ -36,15 +36,15 @@ class Characteristic(models.Model):
         - name (CharField): Nombre de la caracteristica.
         - icon (CharField): Icono de la caracteristica.
     """
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    icon = models.CharField(verbose_name=_('Icon'), max_length=20)
-    type = models.ForeignKey('TypeCharacteristic', verbose_name=_('Type of characteristic'))
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    icon = models.CharField(verbose_name=_('icon'), max_length=20)
+    type = models.ForeignKey('TypeCharacteristic', verbose_name=_('type of characteristic'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Characteristic')
-        verbose_name_plural = _('Characteristics')
+        verbose_name = _('characteristic')
+        verbose_name_plural = _('characteristics')
 
 
 class TypeInfrastructure(models.Model):
@@ -57,14 +57,14 @@ class TypeInfrastructure(models.Model):
         - name (CharField): Nombre del tipo de infraestructura.
         - icon (CharField): Icono del tipo de infraestructura.
     """
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    icon = models.CharField(verbose_name=_('Icon'), max_length=20)
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    icon = models.CharField(verbose_name=_('icon'), max_length=20)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Type of infrastructure')
-        verbose_name_plural = _('Types of infrastructures')
+        verbose_name = _('type of infrastructure')
+        verbose_name_plural = _('types of infrastructures')
 
 
 class Room(models.Model):
@@ -77,14 +77,14 @@ class Room(models.Model):
         - name (CharField): Nombre de la sala.
         - type (ForeignKey): Tipo de infraestructura donde se dictara clases.
     """
-    name = models.CharField(verbose_name=_('Name'), max_length=50)
-    type = models.ForeignKey('TypeInfrastructure', verbose_name=_('Type of infrastructure'))
+    name = models.CharField(verbose_name=_('name'), max_length=50)
+    type = models.ForeignKey('TypeInfrastructure', verbose_name=_('type of infrastructure'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Room')
-        verbose_name_plural = _('Rooms')
+        verbose_name = _('room')
+        verbose_name_plural = _('rooms')
 
 
 class RoomCharacteristic(models.Model):
@@ -100,12 +100,12 @@ class RoomCharacteristic(models.Model):
         - characteristic (ForeignKey): Clave foranea que hace referencia a la caracteristica.
     """
 
-    value = models.CharField(verbose_name=_('Value'), max_length=20)
-    room = models.ForeignKey('Room', verbose_name=_('Romm'))
-    characteristic = models.ForeignKey('Characteristic', verbose_name=_('Characteristic'))
+    value = models.CharField(verbose_name=_('value'), max_length=20)
+    room = models.ForeignKey('Room', verbose_name=_('room'))
+    characteristic = models.ForeignKey('Characteristic', verbose_name=_('characteristic'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = _('Characteristic of the room')
-        verbose_name_plural = _('Characteristics of the rooms')
+        verbose_name = _('characteristic of the room')
+        verbose_name_plural = _('characteristics of the rooms')

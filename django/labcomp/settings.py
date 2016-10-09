@@ -33,11 +33,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 DATABASES = {
-    # 'default': env.db('DATABASE_URL')
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'local',
-    }
+    'default': env.db('DATABASE_URL')
 }
 
 MIDDLEWARE_CLASSES = (
@@ -74,6 +70,9 @@ INSTALLED_APPS = (
     'lab_rooms',
     'lab_subjects',
     'lab_reservations',
+
+    # extra
+    'colorful',
 
     'utils',
     'scripts',

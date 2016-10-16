@@ -73,6 +73,12 @@ class Section(models.Model):
         verbose_name = _('section')
         verbose_name_plural = _('sections')
 
+    def __str__(self):
+        return '{} Sec.{}'.format(
+            self.subject,
+            self.code
+        )
+
 
 class TimeTable(models.Model):
     """
@@ -87,7 +93,8 @@ class TimeTable(models.Model):
         - room (ForeignKey): Clave foranea que hace referencia a la sala.
     """
 
-    block = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
+    block_start = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
+    block_end = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
     day = models.IntegerField(verbose_name=_('day'), choices=choices_days)
     section = models.ForeignKey('Section', verbose_name=_('section'))
     room = models.ForeignKey('lab_rooms.Room', verbose_name=_('room'))
@@ -97,6 +104,19 @@ class TimeTable(models.Model):
     class Meta:
         verbose_name = _('timetable')
         verbose_name_plural = _('timetables')
+
+    def get_block_valid(block_start, block_end, day, room):
+        timetable = TimeTable.objects.filter(day=day, room=room)
+
+        hours = []
+        for t in timetable:
+            for block in range(t.block_start, t.block_end):
+                hours.append(block)
+
+        for block in range(block_start, block_end):
+            if block in hours:
+                return False
+        return True
 
 
 class HourFreed(models.Model):

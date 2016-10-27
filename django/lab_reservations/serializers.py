@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import TimeTable
 
+
 class TimeTableSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -26,3 +27,22 @@ class TimeTableSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {'block_end': 'El bloque de hora final debe ser diferente al inicial'})
         return data
+
+
+class BlocksTimeTableSerializer(serializers.ModelSerializer):
+    blocks = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TimeTable
+        fields = ('section', 'day', 'blocks')
+    
+    def get_blocks(self, obj):
+        return [x for x in range(obj.block_start, obj.block_end)]
+
+
+class RoomTimeTableSerializer(serializers.Serializer):
+    rows = serializers.SerializerMethodField()
+    
+    def get_rows(self, obj):
+        timetables = TimeTable.objects.filter(room=obj)
+        return [BlocksTimeTableSerializer(x).data for x in timetables]

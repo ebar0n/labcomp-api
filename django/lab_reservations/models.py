@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
-choices_blocks = [
+CHOICES_BLOCKS = [
     [1, '7:00'],
     [2, '8:00'],
     [3, '9:00'],
@@ -20,7 +20,7 @@ choices_blocks = [
     [16, '22:00'],
 ]
 
-choices_days = [
+CHOICES_DAYS = [
     [0, _('Monday')],
     [1, _('Tuesday')],
     [2, _('Wednesday')],
@@ -93,9 +93,9 @@ class TimeTable(models.Model):
         - room (ForeignKey): Clave foranea que hace referencia a la sala.
     """
 
-    block_start = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
-    block_end = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
-    day = models.IntegerField(verbose_name=_('day'), choices=choices_days)
+    block_start = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
+    block_end = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
+    day = models.IntegerField(verbose_name=_('day'), choices=CHOICES_DAYS)
     section = models.ForeignKey('Section', verbose_name=_('section'))
     room = models.ForeignKey('lab_rooms.Room', verbose_name=_('room'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import TimeTable
+from .models import TimeTable, Section
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -28,9 +28,28 @@ class TimeTableSerializer(serializers.ModelSerializer):
                 {'block_end': 'El bloque de hora final debe ser diferente al inicial'})
         return data
 
+class SectionSerializer(serializers.ModelSerializer):
+    subject = serializers.SerializerMethodField()
+    subject_code = serializers.SerializerMethodField()
+    color = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Section
+        fields = ('code', 'subject', 'subject_code', 'color')
+
+    def get_subject(self, obj):
+        return obj.subject.name
+
+    def get_subject_code(self, obj):
+        return obj.subject.code
+
+    def get_color(self, obj):
+        return obj.subject.color.code
+
 
 class BlocksTimeTableSerializer(serializers.ModelSerializer):
     blocks = serializers.SerializerMethodField()
+    section = SectionSerializer()
 
     class Meta:
         model = TimeTable

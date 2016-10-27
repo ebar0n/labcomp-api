@@ -23,11 +23,15 @@ class BaseTimeTableView(views.APIView):
     def get(self, request, format=None):
         base = {}
         base['blocks'] = {
-            array[0]: array[1]
-            for array in CHOICES_BLOCKS
+            obj[0]: obj[1]
+            for obj in CHOICES_BLOCKS
         }
         base['days'] = {
-            array[0]: array[1]
-            for array in CHOICES_DAYS
+            obj[0]: obj[1]
+            for obj in CHOICES_DAYS
+        }
+        base['rooms'] = {
+            obj.pk: obj.name
+            for obj in Room.objects.all()
         }
         return Response(base)

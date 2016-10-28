@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import TimeTable, Section
+from lab_rooms.models import TypeCharacteristic, Characteristic, RoomCharacteristic
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -27,6 +28,7 @@ class TimeTableSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {'block_end': 'El bloque de hora final debe ser diferente al inicial'})
         return data
+
 
 class SectionSerializer(serializers.ModelSerializer):
     subject = serializers.SerializerMethodField()
@@ -61,7 +63,25 @@ class BlocksTimeTableSerializer(serializers.ModelSerializer):
 
 class RoomTimeTableSerializer(serializers.Serializer):
     rows = serializers.SerializerMethodField()
-    
+    characteristics = serializers.SerializerMethodField()
+
     def get_rows(self, obj):
         timetables = TimeTable.objects.filter(room=obj)
         return [BlocksTimeTableSerializer(x).data for x in timetables]
+    
+    def get_characteristics(self, obj):
+        json = {}
+        types = TypeCharacteristic.objects.all()
+        for type in types:
+            json[type.name] = {}
+            json[type.name]['icon'] = type.icon
+            arrayObj = []
+            characteristics = RoomCharacteristic.objects.filter(room=obj)
+            for characteristic in characteristics:
+                json1 = {}
+                json1[characteristic.characteristic.name] = {}
+                json1[characteristic.characteristic.name]['icon'] = characteristic.characteristic.icon
+                json1[characteristic.characteristic.name]['value'] = characteristic.value
+                arrayObj.append(json1)
+            json[type.name]['characteristics'] = arrayObj
+        return json

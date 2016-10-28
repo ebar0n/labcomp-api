@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import TimeTable, Section
+from .models import TimeTable, Section, Reservation
 from lab_rooms.models import TypeCharacteristic, Characteristic, RoomCharacteristic
 
 
@@ -85,3 +85,9 @@ class RoomTimeTableSerializer(serializers.Serializer):
                 arrayObj.append(json1)
             json[type.name]['characteristics'] = arrayObj
         return json
+
+class ReservationSerializer(serializers.ModelSerializer):
+    timetable = TimeTableSerializer()
+
+    class Meta:
+        model = Reservation

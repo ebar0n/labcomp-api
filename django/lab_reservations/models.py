@@ -96,7 +96,7 @@ class TimeTable(models.Model):
     block_start = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
     block_end = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
     day = models.IntegerField(verbose_name=_('day'), choices=CHOICES_DAYS)
-    section = models.ForeignKey('Section', verbose_name=_('section'))
+    section = models.ForeignKey('Section', verbose_name=_('section'), null=True)
     room = models.ForeignKey('lab_rooms.Room', verbose_name=_('room'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -162,7 +162,7 @@ class Reservation(models.Model):
     semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
     subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
     user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
-    timetable = models.ManyToManyField('TimeTable', verbose_name=_('timetable'))
+    timetable = models.ForeignKey('TimeTable', verbose_name=_('timetable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 

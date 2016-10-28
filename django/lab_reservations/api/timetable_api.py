@@ -1,9 +1,9 @@
 from rest_framework import viewsets, generics, views
 
-from lab_reservations.models import TimeTable
+from lab_reservations.models import TimeTable, Reservation
 from lab_rooms.models import Room
 
-from lab_reservations.serializers import TimeTableSerializer, RoomTimeTableSerializer
+from lab_reservations.serializers import TimeTableSerializer, RoomTimeTableSerializer, ReservationSerializer
 from lab_reservations.models import CHOICES_BLOCKS, CHOICES_DAYS
 from rest_framework.response import Response
 
@@ -35,3 +35,8 @@ class BaseTimeTableView(views.APIView):
             for obj in Room.objects.all()
         }
         return Response(base)
+
+
+class ReservationViewSet(viewsets.ModelViewSet):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer

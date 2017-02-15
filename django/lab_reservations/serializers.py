@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .models import TimeTable, Section, Reservation
-from lab_rooms.models import TypeCharacteristic, Characteristic, RoomCharacteristic
+from lab_rooms.models import RoomCharacteristic, TypeCharacteristic
+
+from .models import Reservation, Section, TimeTable
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -15,10 +16,7 @@ class TimeTableSerializer(serializers.ModelSerializer):
         if block_start != block_end:
             if block_start < block_end:
                 if TimeTable.get_block_valid(
-                    block_start,
-                    block_end,
-                    data['day'],
-                    data['room']) is False:
+                        block_start, block_end, data['day'], data['room']) is False:
                     raise serializers.ValidationError(
                         {'block_end': 'Colisión de horas'})
             else:
@@ -56,7 +54,7 @@ class BlocksTimeTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeTable
         fields = ('section', 'day', 'blocks')
-    
+
     def get_blocks(self, obj):
         return [x for x in range(obj.block_start, obj.block_end)]
 
@@ -68,7 +66,7 @@ class RoomTimeTableSerializer(serializers.Serializer):
     def get_rows(self, obj):
         timetables = TimeTable.objects.filter(room=obj)
         return [BlocksTimeTableSerializer(x).data for x in timetables]
-    
+
     def get_characteristics(self, obj):
         json = {}
         types = TypeCharacteristic.objects.all()
@@ -85,6 +83,7 @@ class RoomTimeTableSerializer(serializers.Serializer):
                 arrayObj.append(json1)
             json[type.name]['characteristics'] = arrayObj
         return json
+
 
 class ReservationSerializer(serializers.ModelSerializer):
     timetable = TimeTableSerializer()

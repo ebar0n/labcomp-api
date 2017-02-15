@@ -1,11 +1,9 @@
-from rest_framework import viewsets, generics, views
-
-from lab_reservations.models import TimeTable, Reservation
-from lab_rooms.models import Room
-
-from lab_reservations.serializers import TimeTableSerializer, RoomTimeTableSerializer, ReservationSerializer
-from lab_reservations.models import CHOICES_BLOCKS, CHOICES_DAYS
+from rest_framework import generics, views, viewsets
 from rest_framework.response import Response
+
+from lab_reservations.models import CHOICES_BLOCKS, CHOICES_DAYS, Reservation, TimeTable
+from lab_reservations.serializers import ReservationSerializer, RoomTimeTableSerializer, TimeTableSerializer
+from lab_rooms.models import Room
 
 
 class TimeTableViewSet(viewsets.ModelViewSet):

@@ -1,7 +1,9 @@
 from django.conf.urls import include, url
 from rest_framework import routers
 
-from lab_reservations.api.timetable_api import TimeTableViewSet, RoomTimeTableView, BaseTimeTableView, ReservationViewSet
+from lab_reservations.api.timetable_api import (
+    BaseTimeTableView, ReservationViewSet, RoomTimeTableView, TimeTableViewSet,
+)
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()

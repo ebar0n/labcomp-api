@@ -9,6 +9,7 @@ class TimeTableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TimeTable
+        fields = '__all__'
 
     def validate(self, data):
         block_start = data['block_start']
@@ -90,3 +91,4 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reservation
+        fields = '__all__'

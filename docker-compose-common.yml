@@ -2,14 +2,8 @@ version: '2'
 
 services:
 
-  admin-develoment:
-    build:
-      context: .
-      dockerfile: Dockerfile-Development
-    env_file: ./.env
-    volumes:
-      - ./django:/srv/www/django
-    working_dir: /srv/www/django
+  redis:
+    image: redis:latest
 
   ldap:
     image: osixia/openldap
@@ -29,18 +23,35 @@ services:
       - MYSQL_PASSWORD=labcomp
       - MYSQL_ROOT_PASSWORD=labcomp
 
+  admin-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile-Development
+    env_file: ./.env
+    volumes:
+      - ./django:/srv/www/django
+    working_dir: /srv/www/django
+
+  admin-pro:
+    build:
+      context: .
+      dockerfile: Dockerfile-Production
+    env_file: ./.env
+    volumes:
+      - ./django:/srv/www/django
+      - ./run:/srv/www/run
+    working_dir: /srv/www/django
+    restart: always
+
   nginx:
     build: ./compose/nginx
     env_file: ./.env
     volumes:
-      - ./django/public/media/:/srv/www/media/
-      - ./django/public/staticfiles/:/srv/www/staticfiles/
+      - ./django/public/media/:/srv/www/public/media/
+      - ./django/public/staticfiles/:/srv/www/public/staticfiles/
+      - ./django/public/app/:/srv/www/public/app/
       - ./run:/srv/www/run
     restart: always
     working_dir: /var/www/run
     ports:
       - '80:80'
-      - '443:443'
-
-  redis:
-    image: redis:latest

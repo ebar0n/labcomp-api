@@ -84,6 +84,8 @@ db.sqlite3
 django/local
 media
 staticfiles
+django/public/app
+
 
 # Celery
 celerybeat*

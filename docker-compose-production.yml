@@ -2,26 +2,23 @@ version: '2'
 
 services:
 
-  #ldap:
-  #  extends:
-  #    file: docker-compose-common.yml
-  #    service: ldap
-
   redis:
     extends:
       file: docker-compose-common.yml
       service: redis
+    restart: always
 
   mysql:
     extends:
       file: docker-compose-common.yml
       service: mysql
+    restart: always
 
   celerybeat:
     extends:
       file: docker-compose-common.yml
-      service: admin-dev
-    command: celery -A labcomp beat -l info --pidfile="/tmp/run/celery/beat.pid"
+      service: admin-pro
+    command: celery -A labcomp beat -l info --pidfile="/tmp/beat.pid"
     depends_on:
       - mysql
       - redis
@@ -29,8 +26,8 @@ services:
   celeryworker:
     extends:
       file: docker-compose-common.yml
-      service: admin-dev
-    command: celery -A labcomp worker -l info --pidfile="/tmp/run/celery/worker.pid"
+      service: admin-pro
+    command: celery -A labcomp worker -l info --pidfile="/tmp/worker.pid"
     depends_on:
       - mysql
       - redis
@@ -38,10 +35,15 @@ services:
   django:
     extends:
       file: docker-compose-common.yml
-      service: admin-dev
-    command: python manage.py runserver_plus 0.0.0.0:8000
+      service: admin-pro
+    command: uwsgi --emperor uwsgi.ini
     depends_on:
       - mysql
       - redis
+
+  nginx:
+    extends:
+      file: docker-compose-common.yml
+      service: nginx
     ports:
-      - '8000:8000'
+      - "80:80"

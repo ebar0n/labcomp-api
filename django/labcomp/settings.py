@@ -151,7 +151,6 @@ locale_root = root.path('locale/')
 LOCALE_PATHS = (locale_root(),)
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-STATICFILES_DIRS = (public_root('static'),)
 STATIC_ROOT = public_root('staticfiles')
 STATIC_URL = env('STATIC_URL')
 MEDIA_ROOT = public_root('media')

@@ -12,4 +12,4 @@ RUN apt-get update && apt-get install -y \
 
 COPY ./requirements/base.pip /requirements/base.pip
 COPY ./requirements/development.pip /requirements/development.pip
-RUN pip install -r /requirements/development.pip
+RUN pip install -r /requirements/development.pip --timeout=300

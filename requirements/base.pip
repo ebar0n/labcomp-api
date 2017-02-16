@@ -12,7 +12,6 @@ django-grappelli==2.8.2
 django-import-export==0.4.5
 django-redis==4.3.0
 django-redis-cache==1.6.5
-django-rest-swagger==0.3.7
 django-python3-ldap==0.9.10
 djangorestframework==3.4.7
 kombu==3.0.33

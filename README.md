@@ -4,68 +4,25 @@
 
 ## Requirements
 
-1. Install and configure Docker
+### Install and configure Docker
 
-    1. Install docker. [Docker](https://www.docker.com)
+1. Install docker. [Docker](https://docker.github.io/engine/installation/)
 
-    1. Install docker-machine and virtualbox. [Machine](https://docs.docker.com/machine/), [Virtualbox](https://www.virtualbox.org/wiki/Downloads) `optional in linux`
+1. Intall docker-compose. [Compose](https://docs.docker.com/compose/install/)
 
-    1. Intall docker-compose. [Compose](https://docs.docker.com/compose/install/)
+### Set Var Environment
 
-1. Set Var Environment
+1. Copy to `env.example` into `.env`
 
-    * Copy to `env.example` into `.env`
+        cp env.example .env
 
-            cp env.example .env
+1. Edit values in `.env`
 
-    * Edit values in `.env`
+        nano .env
 
-            nano .env
-
-### Run the project DEV
-
-1. Only in docker-machine
-
-    1. Pre-Build
-
-            docker-machine create --driver virtualbox --virtualbox-memory 10240 --virtualbox-cpu-count 2 labcomp
-            docker-machine start labcomp
-            eval "$(docker-machine env labcomp)"
-            docker-machine ip labcomp
-            192.168.99.100
-            echo "192.168.99.100 dev.labcomp.com" | sudo tee -a /etc/hosts > /dev/null
-1. Not use docker-machine
+1. Config domain
 
         echo "127.0.1.1 dev.labcomp.com" | sudo tee -a /etc/hosts > /dev/null
-
-1. Enable cache for Dev
-
-    1. Install
-
-            docker pull ebar0n/proxy-cache
-
-            docker run --name proxy-cache -d --restart=always \
-              --publish 3128:3128 --publish 3141:3141 --publish 3142:3142 \
-              --volume ~/data/proxy-cache/squid/:/var/spool/squid3 \
-              --volume ~/data/proxy-cache/devpi:/var/.devpi/server \
-              --volume ~/data/proxy-cache/aptcacherng:/var/cache/apt-cacher-ng \
-              ebar0n/proxy-cache
-
-    1. Using
-
-            docker start proxy-cache
-
-    1. Check cache container IP == "172.17.1.2"
-
-            docker inspect proxy-cache | grep '"IPAddress":'
-
-1. Build containers
-
-          docker-compose build
-
-## FrontEnd
-
-...
 
 ## BackEnd
 
@@ -119,27 +76,55 @@
 
         docker-compose run --rm django flake8
 
-#### Run all test
-
-        ./test-all.sh
-
 ### Django Internationalization
-
-1. Add import and use the function _ to mark the text to translate
-
-        from django.utils.translation import ugettext as _
-        hello = _('Hello world')
 
 1. Execute this command to runs over the entire source tree of the current directory and pulls out all strings marked for translation.
 
         docker-compose run --rm django python manage.py makemessages --no-location -l es
 
-1. Edit file django/locale/es/LC_MESSAGES/django.po and add a translation.
+1. Edit file public/locale/es/LC_MESSAGES/django.po and add a translation.
 
-        #: module/file.py:12
         msgid "Hello world"
         msgstr "Hola mundo"
 
 1. Compiles .po files to .mo files for use with builtin gettext support.
 
         docker-compose run --rm django python manage.py compilemessages
+
+### Run the project for Production
+
+1. Build
+
+        docker-compose -f docker-compose-production.yml build
+
+1. Initialize
+
+        docker-compose -f docker-compose-production.yml up -d mysql
+        docker-compose -f docker-compose-production.yml run --rm django python manage.py migrate --noinput
+        docker-compose -f docker-compose-production.yml run --rm django python manage.py collectstatic --noinput
+        docker-compose -f docker-compose-production.yml run --rm django python manage.py compilemessages
+
+1. Run Django server
+
+        docker-compose -f docker-compose-production.yml up -d
+
+1. Visit API [api.labcomp.edwarbaron.me/](http://api.labcomp.edwarbaron.me/)
+
+### Automatic deploy using `fabric`
+
+1. On Linux
+
+        pip install fabric
+        ~/.local/bin/fab deploy_dev
+
+1. On macOS
+
+        pip install --user fabric
+        ~/Library/Python/2.7/bin/fab deploy_dev
+
+1. Other taks
+
+    1. fab deploy_dev
+    1. fab deploy_production
+    1. fab test
+    1. fab update_local_db

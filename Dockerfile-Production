@@ -13,6 +13,6 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip
 
 COPY ./requirements/base.pip /requirements/base.pip
-COPY ./requirements/development.pip /requirements/development.pip
+COPY ./requirements/production.pip /requirements/production.pip
 
-RUN pip install -r /requirements/development.pip --timeout=300
+RUN pip install -r /requirements/production.pip

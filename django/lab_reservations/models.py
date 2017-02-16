@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
-choices_blocks = [
+CHOICES_BLOCKS = [
     [1, '7:00'],
     [2, '8:00'],
     [3, '9:00'],
@@ -20,7 +20,7 @@ choices_blocks = [
     [16, '22:00'],
 ]
 
-choices_days = [
+CHOICES_DAYS = [
     [0, _('Monday')],
     [1, _('Tuesday')],
     [2, _('Wednesday')],
@@ -73,6 +73,12 @@ class Section(models.Model):
         verbose_name = _('section')
         verbose_name_plural = _('sections')
 
+    def __str__(self):
+        return '{} Sec.{}'.format(
+            self.subject,
+            self.code
+        )
+
 
 class TimeTable(models.Model):
     """
@@ -87,9 +93,10 @@ class TimeTable(models.Model):
         - room (ForeignKey): Clave foranea que hace referencia a la sala.
     """
 
-    block = models.IntegerField(verbose_name=_('block'), choices=choices_blocks)
-    day = models.IntegerField(verbose_name=_('day'), choices=choices_days)
-    section = models.ForeignKey('Section', verbose_name=_('section'))
+    block_start = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
+    block_end = models.IntegerField(verbose_name=_('block'), choices=CHOICES_BLOCKS)
+    day = models.IntegerField(verbose_name=_('day'), choices=CHOICES_DAYS)
+    section = models.ForeignKey('Section', verbose_name=_('section'), null=True)
     room = models.ForeignKey('lab_rooms.Room', verbose_name=_('room'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -97,6 +104,19 @@ class TimeTable(models.Model):
     class Meta:
         verbose_name = _('timetable')
         verbose_name_plural = _('timetables')
+
+    def get_block_valid(block_start, block_end, day, room):
+        timetable = TimeTable.objects.filter(day=day, room=room)
+
+        hours = []
+        for t in timetable:
+            for block in range(t.block_start, t.block_end):
+                hours.append(block)
+
+        for block in range(block_start, block_end):
+            if block in hours:
+                return False
+        return True
 
 
 class HourFreed(models.Model):
@@ -142,7 +162,7 @@ class Reservation(models.Model):
     semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
     subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
     user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
-    timetable = models.ManyToManyField('TimeTable', verbose_name=_('timetable'))
+    timetable = models.ForeignKey('TimeTable', verbose_name=_('timetable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 

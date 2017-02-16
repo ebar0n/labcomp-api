@@ -86,6 +86,9 @@ class Room(models.Model):
         verbose_name = _('room')
         verbose_name_plural = _('rooms')
 
+    def __str__(self):
+        return self.name
+
 
 class RoomCharacteristic(models.Model):
     """

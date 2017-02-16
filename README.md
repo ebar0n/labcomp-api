@@ -1,5 +1,7 @@
 # LABCOMP App
 
+[![Build Status](https://travis-ci.org/UNETDevStudents/labcomp-api.svg?branch=master)](https://travis-ci.org/UNETDevStudents/labcomp-api)
+
 ## Requirements
 
 1. Install and configure Docker

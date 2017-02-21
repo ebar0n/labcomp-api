@@ -24,6 +24,9 @@ class TypeCharacteristic(models.Model):
         verbose_name = _('type of characteristic')
         verbose_name_plural = _('types of characteristics')
 
+    def __str__(self):
+        return self.name
+
 
 class Characteristic(models.Model):
     """
@@ -46,6 +49,9 @@ class Characteristic(models.Model):
         verbose_name = _('characteristic')
         verbose_name_plural = _('characteristics')
 
+    def __str__(self):
+        return self.name
+
 
 class TypeInfrastructure(models.Model):
     """
@@ -66,6 +72,9 @@ class TypeInfrastructure(models.Model):
         verbose_name = _('type of infrastructure')
         verbose_name_plural = _('types of infrastructures')
 
+    def __str__(self):
+        return self.name
+
 
 class Room(models.Model):
     """
@@ -82,12 +91,12 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = _('room')
         verbose_name_plural = _('rooms')
-
-    def __str__(self):
-        return self.name
 
 
 class RoomCharacteristic(models.Model):
@@ -112,3 +121,6 @@ class RoomCharacteristic(models.Model):
     class Meta:
         verbose_name = _('characteristic of the room')
         verbose_name_plural = _('characteristics of the rooms')
+
+    def __str__(self):
+        return '{} {}'.format(self.room, self.characteristic)

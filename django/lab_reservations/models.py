@@ -30,7 +30,7 @@ CHOICES_DAYS = [
     [6, _('Sunday')],
 ]
 
-choices_type_reservations = [
+CHOICES_TYPE_RESERVATIONS = [
     [1, _('Partial')],
     [2, _('Quiz')],
     [3, _('Preparaduria')],
@@ -40,7 +40,7 @@ choices_type_reservations = [
     [7, _('Other')],
 ]
 
-choices_status_reservations = [
+CHOICES_STATUS_RESERVATIONS = [
     [1, _('Approved')],
     [2, _('Pending')],
     [3, _('Rejected')],
@@ -158,7 +158,7 @@ class Reservation(models.Model):
 
     date = models.DateTimeField(verbose_name=_('date'))
     description = models.CharField(verbose_name=_('description'), max_length=200)
-    type = models.IntegerField(verbose_name=_('type of reservation'), choices=choices_type_reservations)
+    type = models.IntegerField(verbose_name=_('type of reservation'), choices=CHOICES_TYPE_RESERVATIONS)
     semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
     subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
     user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
@@ -186,7 +186,7 @@ class StatusReservationHistoric(models.Model):
 
     start_date = models.DateTimeField(verbose_name=_('start date'))
     end_date = models.DateTimeField(verbose_name=_('end date'))
-    status = models.IntegerField(verbose_name=_('status'), choices=choices_status_reservations)
+    status = models.IntegerField(verbose_name=_('status'), choices=CHOICES_STATUS_RESERVATIONS)
     reservation = models.ForeignKey('Reservation', verbose_name=_('reservation'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

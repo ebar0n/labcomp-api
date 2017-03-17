@@ -185,7 +185,7 @@ class StatusReservationHistoric(models.Model):
     """
 
     start_date = models.DateTimeField(verbose_name=_('start date'))
-    end_date = models.DateTimeField(verbose_name=_('end date'))
+    end_date = models.DateTimeField(verbose_name=_('end date'), null=True)
     status = models.IntegerField(verbose_name=_('status'), choices=CHOICES_STATUS_RESERVATIONS)
     reservation = models.ForeignKey('Reservation', verbose_name=_('reservation'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)

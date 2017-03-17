@@ -2,7 +2,9 @@ from rest_framework import serializers
 
 from lab_rooms.models import RoomCharacteristic, TypeCharacteristic
 
-from .models import Reservation, Section, TimeTable
+from .models import Reservation, Section, TimeTable, StatusReservationHistoric
+
+from datetime import datetime
 
 
 class TimeTableSerializer(serializers.ModelSerializer):
@@ -92,3 +94,20 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = '__all__'
+        exclude = ('date', )
+
+    def create(self, validated_data):
+        data_timetable = validated_data.pop('timetable')
+        timetable = TimeTable.objects.create(**data_timetable)
+
+        reservation = Reservation.objects.create(
+            timetable=timetable,
+            date=datetime.now(),
+            **validated_data)
+
+        StatusReservationHistoric.objects.create(
+            start_date=datetime.now(),
+            reservation=reservation,
+            status=2
+        )
+        return reservation

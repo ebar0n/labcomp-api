@@ -102,7 +102,6 @@ class ReservationSerializer(serializers.ModelSerializer):
 
         reservation = Reservation.objects.create(
             timetable=timetable,
-            date=datetime.now(),
             **validated_data)
 
         StatusReservationHistoric.objects.create(

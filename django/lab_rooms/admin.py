@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from lab_rooms.models import Characteristic, Room, RoomCharacteristic, TypeCharacteristic, TypeInfrastructure
 
 

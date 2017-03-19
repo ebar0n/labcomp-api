@@ -30,7 +30,7 @@ CHOICES_DAYS = [
     [6, _('Sunday')],
 ]
 
-choices_type_reservations = [
+CHOICES_TYPE_RESERVATIONS = [
     [1, _('Partial')],
     [2, _('Quiz')],
     [3, _('Preparaduria')],
@@ -40,7 +40,7 @@ choices_type_reservations = [
     [7, _('Other')],
 ]
 
-choices_status_reservations = [
+CHOICES_STATUS_RESERVATIONS = [
     [1, _('Approved')],
     [2, _('Pending')],
     [3, _('Rejected')],
@@ -118,6 +118,24 @@ class TimeTable(models.Model):
                 return False
         return True
 
+    def get_block_start(self):
+        for x in CHOICES_BLOCKS:
+            if x[0] == self.block_start:
+                return x[1]
+        return self.block_start
+
+    def get_block_end(self):
+        for x in CHOICES_BLOCKS:
+            if x[0] == self.block_end:
+                return x[1]
+        return self.block_end
+
+    def get_day(self):
+        for x in CHOICES_DAYS:
+            if x[0] == self.day:
+                return x[1]
+        return self.day
+
 
 class HourFreed(models.Model):
     """
@@ -156,11 +174,10 @@ class Reservation(models.Model):
         - timetable (ManyToManyField): Almacena los bloques de horas que ocupan en el horario la reservacion.
     """
 
-    date = models.DateTimeField(verbose_name=_('date'))
+    date = models.DateField(verbose_name=_('date'))
     description = models.CharField(verbose_name=_('description'), max_length=200)
-    type = models.IntegerField(verbose_name=_('type of reservation'), choices=choices_type_reservations)
+    type = models.IntegerField(verbose_name=_('type of reservation'), choices=CHOICES_TYPE_RESERVATIONS)
     semester = models.ForeignKey('lab_subjects.Semester', verbose_name=_('semester'))
-    subject = models.ForeignKey('lab_subjects.Subject', verbose_name=_('subject'))
     user = models.ForeignKey('lab_accounts.User', verbose_name=_('user'))
     timetable = models.ForeignKey('TimeTable', verbose_name=_('timetable'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -169,6 +186,13 @@ class Reservation(models.Model):
     class Meta:
         verbose_name = _('reservation')
         verbose_name_plural = _('reservations')
+
+    def get_status(self):
+        status = self.statusreservationhistoric_set.filter(end_date=None)
+        for x in CHOICES_STATUS_RESERVATIONS:
+            if x[0] == status[0].status:
+                return x
+        return []
 
 
 class StatusReservationHistoric(models.Model):
@@ -185,8 +209,8 @@ class StatusReservationHistoric(models.Model):
     """
 
     start_date = models.DateTimeField(verbose_name=_('start date'))
-    end_date = models.DateTimeField(verbose_name=_('end date'))
-    status = models.IntegerField(verbose_name=_('status'), choices=choices_status_reservations)
+    end_date = models.DateTimeField(verbose_name=_('end date'), null=True)
+    status = models.IntegerField(verbose_name=_('status'), choices=CHOICES_STATUS_RESERVATIONS)
     reservation = models.ForeignKey('Reservation', verbose_name=_('reservation'))
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

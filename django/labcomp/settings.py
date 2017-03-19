@@ -173,7 +173,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
-
+''''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -197,6 +197,7 @@ LOGGING = {
         }
     }
 }
+'''
 
 # LDAP
 # The URL of the LDAP server.

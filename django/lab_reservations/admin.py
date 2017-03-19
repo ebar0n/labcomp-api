@@ -1,12 +1,13 @@
-from django.contrib import admin
-from django.utils.translation import ugettext as _
-from django.conf.urls import url
-from django.urls import reverse
-from django.utils.html import format_html
-from django.contrib.admin import SimpleListFilter
 from datetime import datetime
 
-from .models import Section, Reservation, StatusReservationHistoric, CHOICES_STATUS_RESERVATIONS
+from django.conf.urls import url
+from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
+from django.urls import reverse
+from django.utils.html import format_html
+from django.utils.translation import ugettext as _
+
+from .models import CHOICES_STATUS_RESERVATIONS, Reservation, Section, StatusReservationHistoric
 
 
 class StatusFilter(SimpleListFilter):

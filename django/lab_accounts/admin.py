@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib import admin
-
 from lab_accounts.models import User
 
 
